@@ -38,3 +38,5 @@ const rest = new REST({ version: "10" }).setToken(token);
     console.error(error);
   }
 })();
+
+//deply from terminal with node "node deploy-commands.js"

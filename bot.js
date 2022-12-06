@@ -71,9 +71,9 @@ client.on(Events.InteractionCreate, async (interaction) => {
   console.log(`Logged in as ${client.user.tag}!`);
 }); */
 
-//Logs all messages for testing purposes
-client.on("messageCreate", (message) => {
-  console.log(`Keylog: ` + `${client.user.tag}: ` + message.content);
-});
+//Logs all messages for development purposes
+/* client.on("messageCreate", (message) => {
+  console.log(`Keylogger: ` + `${client.user.tag}: ` + message.content);
+}); */
 
 client.login(process.env.BOT_TOKEN);
