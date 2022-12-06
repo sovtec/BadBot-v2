@@ -1,18 +1,3 @@
-/* const {
-  Client,
-  GatewayIntentBits,
-  Collection,
-  messageLink,
-} = require("discord.js");
-const Discord = require("discord.js");
-const client = new Discord.Client({
-  intents: [GatewayIntentBits.Guilds],
-});
-
-client.on("ready", () => {
-  console.log("All systems OK. BOT online!");
-}); */
-
 require("dotenv").config();
 
 const {
@@ -81,39 +66,3 @@ const rest = new REST({ version: "10" }).setToken(token);
     console.error(error);
   }
 })();
-
-/* client.on("messageCreate", (message) => {
-  if (message.content === "!ping") {
-    // send back "Pong." to the channel the message was sent in
-    message.channel.send("Pong.");
-  }
-}); */
-
-/* client.on("interactionCreate", async (interaction) => {
-  if (!interaction.isChatInputCommand()) return;
-
-  if (interaction.commandName === "ping") {
-    await interaction.reply("Pong!");
-  }
-}); */
-
-/*const BOT_PREFIX = "!";
-const MOD_ME_COMMAND = "mod-me";
-
-client.on("messageDelete", (msg) => {
-  msg.channel.send("Stop deleting messages");
-});
-
-client.on("message", (msg) => {
-  if (msg.content == "I love WDS") {
-    msg.react("❤️");
-  }
-
-  if (msg.content === `${BOT_PREFIX}${MOD_ME_COMMAND}`) {
-    modUser(msg.member);
-  }
-});
-
-function modUser(member) {
-  member.roles.add("783084095223234590");
-} */
