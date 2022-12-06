@@ -1,5 +1,5 @@
 require("dotenv").config();
-
+const { token } = require("./config.json");
 const path = require("node:path");
 const fs = require("node:fs");
 const {
@@ -19,37 +19,12 @@ const client = new Client({
   ],
 });
 
-client.login(process.env.BOT_TOKEN);
-
-client.commands = new Collection();
-const commandsPath = path.join(__dirname, "commands");
-const commandFiles = fs
-  .readdirSync(commandsPath)
-  .filter((file) => file.endsWith(".js"));
-
-for (const file of commandFiles) {
-  const filePath = path.join(commandsPath, file);
-  const command = require(filePath);
-  client.commands.set(command.data.name, command);
-}
-
-client.on("ready", () => {
-  console.log(`Logged in as ${client.user.tag}!`);
-});
-
-client.on("messageCreate", (message) => {
-  console.log(`Keylog: ` + `${client.user.tag}: ` + message.content);
-});
-
 client.on(Events.InteractionCreate, async (interaction) => {
   if (!interaction.isChatInputCommand()) return;
 
-  const command = interaction.client.commands.get(interaction.commandName);
+  const command = client.commands.get(interaction.commandName);
 
-  if (!command) {
-    console.error(`No command matching ${interaction.commandName} was found.`);
-    return;
-  }
+  if (!command) return;
 
   try {
     await command.execute(interaction);
@@ -61,3 +36,31 @@ client.on(Events.InteractionCreate, async (interaction) => {
     });
   }
 });
+
+client.commands = new Collection();
+const eventsPath = path.join(__dirname, "events");
+const eventFiles = fs
+  .readdirSync(eventsPath)
+  .filter((file) => file.endsWith(".js"));
+
+for (const file of eventFiles) {
+  const filePath = path.join(eventsPath, file);
+  const event = require(filePath);
+  if (event.once) {
+    client.once(event.name, (...args) => event.execute(...args));
+  } else {
+    client.on(event.name, (...args) => event.execute(...args));
+  }
+}
+
+//This is being called from ready.js
+/* client.on("ready", () => {
+  console.log(`Logged in as ${client.user.tag}!`);
+}); */
+
+//Logs all messages for testing purposes
+client.on("messageCreate", (message) => {
+  console.log(`Keylog: ` + `${client.user.tag}: ` + message.content);
+});
+
+client.login(process.env.BOT_TOKEN);
