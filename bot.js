@@ -60,7 +60,8 @@ client.on(Events.InteractionCreate, async (interaction) => {
   } catch (error) {
     console.error(error);
     await interaction.reply({
-      content: "There was an error while executing this command!",
+      content:
+        "There was an error while executing this command! tell hrdu he sucks!",
       ephemeral: true,
     });
   }
@@ -71,9 +72,17 @@ client.on(Events.InteractionCreate, async (interaction) => {
   console.log(`Logged in as ${client.user.tag}!`);
 }); */
 
-//Logs all messages for development purposes
+//Logs all messages for development purposes, this logging is heavy when alot of logs are being registered at once, not recomended to use to log messages
+
 /* client.on("messageCreate", (message) => {
-  console.log(`Keylogger: ` + `${client.user.tag}: ` + message.content);
+  console.log(
+    `HR's Keylogger: ` +
+      `${message.guild.name}/` +
+      `${message.channel.name} - ` +
+      `${message.createdAt} - ` +
+      `${message.author.username}: ` +
+      message.content
+  );
 }); */
 
 client.login(process.env.BOT_TOKEN);

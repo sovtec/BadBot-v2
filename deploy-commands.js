@@ -17,6 +17,12 @@ for (const file of commandFiles) {
 // Construct and prepare an instance of the REST module
 const rest = new REST({ version: "10" }).setToken(token);
 
+//Delete a command by id, run node deploy-commands.js to delete it properly (COMMANDID IS ID)
+/* rest
+  .delete(Routes.applicationCommand(clientId, "commandID"))
+  .then(() => console.log("Successfully deleted a command"))
+  .catch(console.error); */
+
 // and deploy your commands!
 (async () => {
   try {
@@ -24,6 +30,7 @@ const rest = new REST({ version: "10" }).setToken(token);
       `Started refreshing ${commands.length} application (/) commands.`
     );
 
+    // Adding guildId will result in "local" commands only registering in guild
     // The put method is used to fully refresh all commands in the guild with the current set
     const data = await rest.put(Routes.applicationCommands(clientId), {
       body: commands,

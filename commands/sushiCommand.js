@@ -2,10 +2,12 @@ const { SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("ping")
-    .setDescription("Replies with Pong duh..!")
+    .setName("sushi")
+    .setDescription("Fishyyy")
     .setDMPermission(false),
   async execute(interaction) {
-    await interaction.reply("Pong!");
+    await interaction.reply(
+      "https://tenor.com/view/pog-pogfish-fish-openmouth-gif-20357594"
+    );
   },
 };

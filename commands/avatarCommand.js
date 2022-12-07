@@ -3,6 +3,7 @@ const { SlashCommandBuilder } = require("discord.js");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("avatar")
+    .setDMPermission(false)
     .setDescription(
       "Get the avatar URL of the selected user, or your own avatar."
     )
