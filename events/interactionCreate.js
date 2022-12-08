@@ -15,6 +15,13 @@ module.exports = {
       return;
     }
 
+    //??
+    if (interaction.isCommand()) {
+      const { commands } = client;
+      const { commandName } = interaction;
+      const command = commands.get(commandName);
+    }
+
     try {
       await command.execute(interaction);
     } catch (error) {
