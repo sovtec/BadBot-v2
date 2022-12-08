@@ -6,6 +6,7 @@ module.exports = {
     if (!interaction.isChatInputCommand()) return;
 
     const command = interaction.client.commands.get(interaction.commandName);
+    /* const user = interaction.client.user(interaction.user); */
 
     if (!command) {
       console.error(
