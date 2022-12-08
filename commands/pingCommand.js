@@ -8,6 +8,7 @@ module.exports = {
   async execute(interaction, client) {
     const message = await interaction.deferReply({
       fetchReply: true,
+      ephemeral: true,
     });
 
     const newMessage = `Client Ping: ${
