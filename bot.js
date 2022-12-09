@@ -2,7 +2,6 @@ require("dotenv").config();
 
 const fs = require("node:fs");
 const path = require("node:path");
-const EmbedBuilder = require("discord.js");
 const { token } = require("./config.json");
 const {
   Client,
@@ -22,6 +21,7 @@ const client = new Client({
 });
 
 client.commands = new Collection();
+client.buttons = new Collection();
 
 const eventsPath = path.join(__dirname, "events");
 const eventFiles = fs

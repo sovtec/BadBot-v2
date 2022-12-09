@@ -20,6 +20,17 @@ module.exports = {
       const { commands } = client;
       const { commandName } = interaction;
       const command = commands.get(commandName);
+    } else if (interaction.isButton()) {
+      const { buttons } = client;
+      const { customId } = interaction;
+      const button = buttons.get(customId);
+      if (!button) return new Error(`No button`);
+
+      try {
+        await button.execute(interaction, client);
+      } catch (err) {
+        console.log(err);
+      }
     }
 
     try {
