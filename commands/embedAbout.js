@@ -4,7 +4,9 @@ const {
   Embed,
   User,
 } = require("discord.js");
-const { execute } = require("./embeds");
+
+//deleted this folder
+/* const { execute } = require("./embeds"); */
 
 module.exports = {
   data: new SlashCommandBuilder()

@@ -1,3 +1,6 @@
+const { REST } = require("@discordjs/rest");
+const { ROUTES } = require("discord-api-types/v9");
+
 const { Events } = require("discord.js");
 
 module.exports = {
@@ -16,7 +19,7 @@ module.exports = {
     }
 
     //??
-    if (interaction.isCommand()) {
+    if (interaction.isChatInputCommand()) {
       const { commands } = client;
       const { commandName } = interaction;
       const command = commands.get(commandName);

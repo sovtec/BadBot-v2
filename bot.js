@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const fs = require("node:fs");
 const path = require("node:path");
-const { token } = require("./config.json");
+const { BOT_TOKEN } = process.env;
 const {
   Client,
   GatewayIntentBits,
@@ -22,6 +22,21 @@ const client = new Client({
 
 client.commands = new Collection();
 client.buttons = new Collection();
+client.commandArray = [];
+
+//colors
+client.color = "";
+
+//getting function folder
+const functionFolders = fs.readdirSync(`./functions`);
+for (const folder of functionFolders) {
+  //getting js files and passing files
+  const functionFiles = fs
+    .readdirSync(`./functions/${folder}`)
+    .filter((file) => file.endsWith(".js"));
+  for (const file of functionFiles)
+    require(`./functions/${folder}/${file}`)(client);
+}
 
 const eventsPath = path.join(__dirname, "events");
 const eventFiles = fs
@@ -67,6 +82,11 @@ client.on(Events.InteractionCreate, async (interaction) => {
     });
   }
 });
+
+//New code
+
+client.handleEvents();
+/* client.handleCommands(); */
 
 //This is being called from ready.js
 /* client.on("ready", () => {
