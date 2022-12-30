@@ -8,7 +8,7 @@ module.exports = (client) => {
         file.endsWith(".js")
       );
 
-      const { buttons } = client;
+      const { buttons, modals } = client;
 
       switch (folder) {
         case "commands":
@@ -19,6 +19,13 @@ module.exports = (client) => {
           break;
 
         default:
+          break;
+
+        case "modals":
+          for (const file of componentFiles) {
+            const modal = require(`../components/${folder}/${file}`);
+            modal.set(modal.data.name, modal);
+          }
           break;
       }
     }

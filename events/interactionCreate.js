@@ -1,3 +1,5 @@
+const { InteractionType } = require("discord.js");
+
 const { REST } = require("@discordjs/rest");
 const { ROUTES } = require("discord-api-types/v9");
 
@@ -34,13 +36,24 @@ module.exports = {
       } catch (err) {
         console.log(err);
       }
-    }
+    } else if (interaction.type == InteractionType.ModalSubmit) {
+      const { modals } = client;
+      const { customid } = interaction;
+      const modal = modals.get(customid);
+      if (!modal) return new Error("There is no code for this modal");
 
-    try {
-      await command.execute(interaction);
-    } catch (error) {
-      console.error(`Error executing ${interaction.commandName}`);
-      console.error(error);
+      try {
+        await modal.execute(interaction, client);
+      } catch (error) {
+        console.error(error);
+      }
+
+      try {
+        await command.execute(interaction);
+      } catch (error) {
+        console.error(`Error executing ${interaction.commandName}`);
+        console.error(error);
+      }
     }
   },
 };
