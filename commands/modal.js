@@ -9,14 +9,16 @@ const {
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("modal")
-    .setDescription("Returns modal")
+    .setDescription("Make the bot say something!")
     .setDMPermission(false),
   async execute(interaction, client) {
-    const modal = new ModalBuilder().setCustomId(`hmm`).setTitle(`Sup biatch!`);
+    const modal = new ModalBuilder()
+      .setCustomId(`displayAnswer`)
+      .setTitle(`BotMsg`);
 
     const textInput = new TextInputBuilder()
-      .setCustomId(`hmmInput`)
-      .setLabel(`What is love, baby don't hurt me.`)
+      .setCustomId("showTextModal")
+      .setLabel(`Write something here to make the bot say it!`)
       .setRequired(true)
       .setStyle(TextInputStyle.Short);
 

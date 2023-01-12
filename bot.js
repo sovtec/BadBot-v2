@@ -10,6 +10,7 @@ const {
   messageLink,
   User,
   Events,
+  Message,
 } = require("discord.js");
 const client = new Client({
   intents: [
@@ -94,8 +95,15 @@ client.handleEvents();
   console.log(`Logged in as ${client.user.tag}!`);
 }); */
 
+//ADD THIS LATER PROPERLY
+/* client.on('message', message => {
+  if
+   (/^\d{4}$/.test(message.content))
+   {
+    message.channel.send(`Mabye`);
+   }
+) */
 //Logs all messages for development purposes, this logging is heavy when alot of logs are being registered at once, not recomended to use to log messages
-
 /* client.on("messageCreate", (message) => {
   console.log(
     `HR's Keylogger: ` +
@@ -108,5 +116,6 @@ client.handleEvents();
 }); */
 
 client.handleEvents();
+/* client.handleComponents(); */
 
 client.login(process.env.BOT_TOKEN);
